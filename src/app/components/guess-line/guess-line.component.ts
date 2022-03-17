@@ -9,7 +9,7 @@ import { Guess } from 'src/utils/Guess';
 export class GuessLineComponent implements OnInit {
   @Input()
   guess: Guess;
-  
+
   constructor() {}
 
   ngOnInit(): void {}

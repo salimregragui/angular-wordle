@@ -9,7 +9,7 @@ import { Letter } from 'src/utils/Guess';
 export class GuessLetterComponent implements OnInit {
   @Input()
   letter: Letter;
-  
+
   constructor() {}
 
   ngOnInit(): void {}

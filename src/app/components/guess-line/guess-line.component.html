@@ -1,7 +1,6 @@
 <div class="guess-line">
-  <app-guess-letter [letter]="guess.firstLetter"></app-guess-letter>
-  <app-guess-letter [letter]="guess.secondLetter"></app-guess-letter>
-  <app-guess-letter [letter]="guess.thirdLetter"></app-guess-letter>
-  <app-guess-letter [letter]="guess.fourthLetter"></app-guess-letter>
-  <app-guess-letter [letter]="guess.fifthLetter"></app-guess-letter>
+  <app-guess-letter
+    *ngFor="let letter of guess.letters"
+    [letter]="letter"
+  ></app-guess-letter>
 </div>
