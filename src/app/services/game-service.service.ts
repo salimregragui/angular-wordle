@@ -15,6 +15,11 @@ export class GameService {
   currentGuess: number;
   currentLetter: number;
 
+  //for keyboard
+  correctLetters: string[] = [];
+  falseLetters: string[] = [];
+  wrongPosLetters: string[] = [];
+
   constructor() {
     for (let i = 0; i < this.maxNumberOfGuesses; i++) {
       this.guesses.push({
@@ -41,6 +46,21 @@ export class GameService {
 
   getCurrentGuess(): Observable<number> {
     return of(this.currentGuess);
+  }
+
+  getWrongPosLetters(): Observable<string[]> {
+    console.log(this.wrongPosLetters);
+    return of(this.wrongPosLetters);
+  }
+
+  getCorrectLetters(): Observable<string[]> {
+    console.log(this.correctLetters);
+    return of(this.correctLetters);
+  }
+
+  getFalseLetters(): Observable<string[]> {
+    console.log(this.falseLetters);
+    return of(this.falseLetters);
   }
 
   keyPressHandle(letter: string): void {
@@ -75,6 +95,28 @@ export class GameService {
         this.guesses[this.currentGuess - 1].letters = this.guesses[
           this.currentGuess - 1
         ].letters.map((letter, i) => {
+          if (letter.letter === this.word[i]) {
+            console.log('equl');
+            this.correctLetters.push(letter.letter);
+            this.wrongPosLetters = this.wrongPosLetters.filter(
+              (l) => l !== letter.letter
+            );
+
+            this.correctLetters = [...new Set(this.correctLetters)];
+            console.log('wrongpos', this.wrongPosLetters);
+            console.log('correct', this.correctLetters);
+          } else if (
+            letter.letter !== this.word[i] &&
+            this.word.includes(letter.letter)
+          ) {
+            console.log('wrong pos');
+            this.wrongPosLetters.push(letter.letter);
+          } else {
+            console.log('wrong');
+            this.falseLetters.push(letter.letter);
+            this.falseLetters = [...new Set(this.falseLetters)];
+          }
+
           return {
             letter: letter.letter,
             isCorrect:
