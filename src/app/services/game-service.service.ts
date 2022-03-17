@@ -96,25 +96,14 @@ export class GameService {
           this.currentGuess - 1
         ].letters.map((letter, i) => {
           if (letter.letter === this.word[i]) {
-            console.log('equl');
             this.correctLetters.push(letter.letter);
-            this.wrongPosLetters = this.wrongPosLetters.filter(
-              (l) => l !== letter.letter
-            );
-
-            this.correctLetters = [...new Set(this.correctLetters)];
-            console.log('wrongpos', this.wrongPosLetters);
-            console.log('correct', this.correctLetters);
           } else if (
             letter.letter !== this.word[i] &&
             this.word.includes(letter.letter)
           ) {
-            console.log('wrong pos');
             this.wrongPosLetters.push(letter.letter);
           } else {
-            console.log('wrong');
             this.falseLetters.push(letter.letter);
-            this.falseLetters = [...new Set(this.falseLetters)];
           }
 
           return {

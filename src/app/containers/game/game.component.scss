@@ -7,6 +7,9 @@
 
   .game-container-guesses {
     width: 70vw;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 }
 

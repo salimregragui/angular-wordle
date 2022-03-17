@@ -5,7 +5,7 @@
         (click)="letterClickHandler(letter)"
         [ngClass]="{
           correct: correctLetters.includes(letter),
-          wrongPos: wrongPosLetters.includes(letter),
+          wrongPos: wrongPosLetters.includes(letter) && !correctLetters.includes(letter),
           notCorrect: falseLetters.includes(letter)
         }"
       >

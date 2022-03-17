@@ -21,19 +21,21 @@ export class KeyboardComponent implements OnInit {
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
-    this.gameService.getCorrectLetters().subscribe((correctLetters) => {
-      console.log(correctLetters);
-      this.correctLetters = correctLetters;
-    });
+    this.gameService
+      .getCorrectLetters()
+      .subscribe((correctLetters) => {
+          (this.correctLetters = correctLetters) 
+        });
 
-    this.gameService.getFalseLetters().subscribe((falseLetters) => {
-      console.log(falseLetters);
-      this.falseLetters = falseLetters;
-    });
+    this.gameService
+      .getFalseLetters()
+      .subscribe((falseLetters) => {
+          (this.falseLetters = falseLetters)
+      });
 
     this.gameService.getWrongPosLetters().subscribe((wrongPosLetters) => {
       console.log(wrongPosLetters);
-      this.wrongPosLetters = wrongPosLetters;
+      (this.wrongPosLetters = wrongPosLetters);
     });
   }
 
