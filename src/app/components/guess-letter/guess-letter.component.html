@@ -1,1 +1,10 @@
-<input type="text" [value]="letterValue | uppercase" />
+<input
+  type="text"
+  [value]="letter.letter | uppercase"
+  disabled
+  [ngClass]="{
+    correct: letter.isCorrect === 'yes',
+    maybe: letter.isCorrect === 'wrong',
+    notCorrect: letter.isCorrect === 'no'
+  }"
+/>

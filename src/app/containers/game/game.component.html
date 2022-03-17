@@ -1,11 +1,9 @@
 <div class="game-container">
   <div class="game-container-guesses">
-    <app-guess-line></app-guess-line>
-    <app-guess-line></app-guess-line>
-    <app-guess-line></app-guess-line>
-    <app-guess-line></app-guess-line>
-    <app-guess-line></app-guess-line>
-    <app-guess-line></app-guess-line>
+    <app-guess-line
+      *ngFor="let guess of guesses"
+      [guess]="guess"
+    ></app-guess-line>
   </div>
 
   <app-keyboard type="qwerty"></app-keyboard>

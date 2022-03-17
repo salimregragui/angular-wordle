@@ -1,11 +1,19 @@
 .game-container {
-    width: calc(100vw - 40px);
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    align-items: center;
+  width: calc(100vw - 40px);
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  align-items: center;
 
+  .game-container-guesses {
+    width: 70vw;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .game-container {
     .game-container-guesses {
-        width: 70vw;
+      width: 400px;
     }
+  }
 }

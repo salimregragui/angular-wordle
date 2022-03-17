@@ -33,7 +33,7 @@ export class KeyboardComponent implements OnInit {
     'b',
     'n',
     'm',
-    'enter',
+    'ent',
     'Del',
   ];
   constructor() {}

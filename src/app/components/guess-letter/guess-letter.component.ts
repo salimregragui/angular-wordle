@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Letter } from 'src/utils/Guess';
 
 @Component({
   selector: 'app-guess-letter',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class GuessLetterComponent implements OnInit {
   @Input()
-  letterValue: string = '';
+  letter: Letter;
   
   constructor() {}
 
