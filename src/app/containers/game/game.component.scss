@@ -2,8 +2,11 @@
   width: calc(100vw - 40px);
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
   align-items: center;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  box-sizing: border-box;
+  height: 100%;
 
   .game-container-guesses {
     width: 70vw;
@@ -15,9 +18,8 @@
 
 @media screen and (min-width: 600px) {
   .game-container {
-      margin-top: 0px;
     .game-container-guesses {
-      width: 400px;
+      width: 600px;
     }
   }
 }

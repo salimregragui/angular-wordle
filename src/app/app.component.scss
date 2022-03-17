@@ -7,4 +7,9 @@
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  justify-content: space-between;
+
+  .content {
+      flex: 1;
+  }
 }

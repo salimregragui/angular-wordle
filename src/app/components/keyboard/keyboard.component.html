@@ -5,8 +5,11 @@
         (click)="letterClickHandler(letter)"
         [ngClass]="{
           correct: correctLetters.includes(letter),
-          wrongPos: wrongPosLetters.includes(letter) && !correctLetters.includes(letter),
-          notCorrect: falseLetters.includes(letter)
+          wrongPos:
+            wrongPosLetters.includes(letter) &&
+            !correctLetters.includes(letter),
+          notCorrect: falseLetters.includes(letter),
+          big: letter === 'Enter' || letter === 'Del'
         }"
       >
         {{ letter | uppercase }}
