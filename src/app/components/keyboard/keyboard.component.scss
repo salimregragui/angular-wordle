@@ -1,0 +1,35 @@
+.keyboard {
+  width: calc(100vw - 40px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+
+  .keyboard-letter {
+    list-style: none;
+
+    button {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      border: none;
+      background: #e8e4e1;
+      color: #191816;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+
+      &:hover {
+        background: #afafaf;
+        cursor: pointer;
+      }
+    }
+  }
+}

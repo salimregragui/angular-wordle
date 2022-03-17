@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './containers/game/game.component';
 import { HelpComponent } from './containers/help/help.component';
 import { LeaderboardComponent } from './containers/leaderboard/leaderboard.component';
+import { SettingsComponent } from './containers/settings/settings.component';
 import { StatsComponent } from './containers/stats/stats.component';
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'stats', component: StatsComponent },
   { path: 'help', component: HelpComponent },
+  { path: 'settings', component: SettingsComponent },
 ];
 
 @NgModule({
