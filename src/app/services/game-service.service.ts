@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { ENGLISH_WORDS } from 'src/utils/english-wordlist';
 import { Guess } from 'src/utils/Guess';
 import { isValidLetter } from 'src/utils/is-valid-letter';
-import { Word } from 'src/utils/Word';
 
 @Injectable({
   providedIn: 'root',
