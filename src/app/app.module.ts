@@ -12,6 +12,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { GuessLineComponent } from './components/guess-line/guess-line.component';
 import { GuessLetterComponent } from './components/guess-letter/guess-letter.component';
 import { KeyboardComponent } from './components/keyboard/keyboard.component';
+import { NotificationCenterComponent } from './components/notification-center/notification-center.component';
+import { NotificationItemComponent } from './components/notification-center/notification-item/notification-item.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { KeyboardComponent } from './components/keyboard/keyboard.component';
     HeaderComponent,
     GuessLineComponent,
     GuessLetterComponent,
-    KeyboardComponent
+    KeyboardComponent,
+    NotificationCenterComponent,
+    NotificationItemComponent
   ],
   imports: [
     BrowserModule,

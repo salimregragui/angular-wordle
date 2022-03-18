@@ -1,0 +1,10 @@
+<li
+  class="notification-item"
+  [ngClass]="{
+    error: notification.type === 'error',
+    success: notification.type === 'success'
+  }"
+  (click)="removeNotificationHandler()"
+>
+  {{ notification.message }}
+</li>

@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { ENGLISH_WORDS } from 'src/utils/english-wordlist';
 import { Guess } from 'src/utils/Guess';
 import { isValidLetter } from 'src/utils/is-valid-letter';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class GameService {
   falseLetters: string[] = [];
   wrongPosLetters: string[] = [];
 
-  constructor() {
+  constructor(private notificationService: NotificationsService) {
     const wordsThatAreMaxWordLetter = ENGLISH_WORDS.filter(
       (word) => word.length === this.maxWordLetter
     );
@@ -141,6 +142,11 @@ export class GameService {
             this.currentGuess++;
             this.currentGuessSubject.next(this.currentGuess);
           }
+        } else {
+          this.notificationService.addNotification({
+            message: 'This word is not a valid english word !',
+            type: 'error',
+          });
         }
       }
     }

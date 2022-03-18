@@ -4,5 +4,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 5px;
+}
+
+@media screen and (min-width: 600px) {
+    .guess-line {
+        gap: 10px;
+    }
 }
