@@ -61,17 +61,14 @@ export class GameService {
   }
 
   getWrongPosLetters(): Observable<string[]> {
-    console.log(this.wrongPosLetters);
     return of(this.wrongPosLetters);
   }
 
   getCorrectLetters(): Observable<string[]> {
-    console.log(this.correctLetters);
     return of(this.correctLetters);
   }
 
   getFalseLetters(): Observable<string[]> {
-    console.log(this.falseLetters);
     return of(this.falseLetters);
   }
 
@@ -154,8 +151,6 @@ export class GameService {
     this.guesses[this.currentGuess - 1].letters.forEach((letter) => {
       wordJoined += letter.letter;
     });
-
-    console.log(wordJoined);
 
     if (ENGLISH_WORDS.includes(wordJoined)) {
       return true;
