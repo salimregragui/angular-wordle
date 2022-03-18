@@ -21,4 +21,8 @@ input {
   &.notCorrect {
     background: #e74c3c;
   }
+
+  &.currentLetter {
+      box-shadow: inset rgba(39, 174, 96, 1) 0px 0px 0px 4px;
+  }
 }

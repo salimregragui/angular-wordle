@@ -10,6 +10,9 @@ export class GuessLetterComponent implements OnInit {
   @Input()
   letter: Letter;
 
+  @Input()
+  isCurrentLetter: boolean;
+
   constructor() {}
 
   ngOnInit(): void {}

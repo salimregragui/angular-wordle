@@ -1,6 +1,7 @@
 <div class="guess-line">
   <app-guess-letter
-    *ngFor="let letter of guess.letters"
+    *ngFor="let letter of guess.letters; let index = index"
     [letter]="letter"
+    [isCurrentLetter]="currentLetter - 1 === index ? true : false"
   ></app-guess-letter>
 </div>

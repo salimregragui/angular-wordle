@@ -10,6 +10,9 @@ export class GuessLineComponent implements OnInit {
   @Input()
   guess: Guess;
 
+  @Input()
+  currentLetter: number;
+
   constructor() {}
 
   ngOnInit(): void {}

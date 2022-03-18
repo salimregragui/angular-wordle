@@ -1,8 +1,9 @@
 <div class="game-container">
   <div class="game-container-guesses">
     <app-guess-line
-      *ngFor="let guess of guesses"
+      *ngFor="let guess of guesses; let index = index"
       [guess]="guess"
+      [currentLetter]="currentGuess - 1 === index ? currentLetter : -1"
     ></app-guess-line>
   </div>
 

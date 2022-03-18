@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { ENGLISH_WORDS } from 'src/utils/english-wordlist';
 import { Guess } from 'src/utils/Guess';
 import { isValidLetter } from 'src/utils/is-valid-letter';
 import { Word } from 'src/utils/Word';
@@ -11,9 +12,12 @@ export class GameService {
   word: string = 'sport';
   guesses: Guess[] = [];
   maxNumberOfGuesses: number = 6;
-  maxWordLetter: number = 5;
+  maxWordLetter: number = 6;
   currentGuess: number;
   currentLetter: number;
+
+  currentGuessSubject: Subject<number> = new BehaviorSubject<number>(1);
+  currentLetterSubject: Subject<number> = new BehaviorSubject<number>(1);
 
   //for keyboard
   correctLetters: string[] = [];
@@ -21,6 +25,15 @@ export class GameService {
   wrongPosLetters: string[] = [];
 
   constructor() {
+    const wordsThatAreMaxWordLetter = ENGLISH_WORDS.filter(
+      (word) => word.length === this.maxWordLetter
+    );
+
+    this.word =
+      wordsThatAreMaxWordLetter[
+        Math.floor(Math.random() * wordsThatAreMaxWordLetter.length)
+      ];
+
     for (let i = 0; i < this.maxNumberOfGuesses; i++) {
       this.guesses.push({
         letters: Array.from(Array(this.maxWordLetter)).map((i) => {
@@ -41,11 +54,11 @@ export class GameService {
   }
 
   getCurrentLetter(): Observable<number> {
-    return of(this.currentLetter);
+    return this.currentLetterSubject.asObservable();
   }
 
   getCurrentGuess(): Observable<number> {
-    return of(this.currentGuess);
+    return this.currentGuessSubject.asObservable();
   }
 
   getWrongPosLetters(): Observable<string[]> {
@@ -77,14 +90,20 @@ export class GameService {
           isCorrect: '',
         };
 
-        this.currentLetter < 5 ? this.currentLetter++ : null;
+        if (this.currentLetter < this.maxWordLetter) {
+          this.currentLetter++;
+          this.currentLetterSubject.next(this.currentLetter);
+        }
       } else if (letter === 'Backspace') {
         this.guesses[this.currentGuess - 1].letters[this.currentLetter - 1] = {
           letter: '',
           isCorrect: '',
         };
 
-        this.currentLetter > 1 ? this.currentLetter-- : null;
+        if (this.currentLetter > 1) {
+          this.currentLetter--;
+          this.currentLetterSubject.next(this.currentLetter);
+        }
       } else if (
         letter === 'Enter' &&
         this.currentLetter === this.word.length &&
@@ -92,35 +111,57 @@ export class GameService {
           this.guesses[this.currentGuess - 1].letters.length - 1
         ].letter !== ''
       ) {
-        this.guesses[this.currentGuess - 1].letters = this.guesses[
-          this.currentGuess - 1
-        ].letters.map((letter, i) => {
-          if (letter.letter === this.word[i]) {
-            this.correctLetters.push(letter.letter);
-          } else if (
-            letter.letter !== this.word[i] &&
-            this.word.includes(letter.letter)
-          ) {
-            this.wrongPosLetters.push(letter.letter);
-          } else {
-            this.falseLetters.push(letter.letter);
+        if (this.isValidWord()) {
+          this.guesses[this.currentGuess - 1].letters = this.guesses[
+            this.currentGuess - 1
+          ].letters.map((letter, i) => {
+            if (letter.letter === this.word[i]) {
+              this.correctLetters.push(letter.letter);
+            } else if (
+              letter.letter !== this.word[i] &&
+              this.word.includes(letter.letter)
+            ) {
+              this.wrongPosLetters.push(letter.letter);
+            } else {
+              this.falseLetters.push(letter.letter);
+            }
+
+            return {
+              letter: letter.letter,
+              isCorrect:
+                letter.letter === this.word[i]
+                  ? 'yes'
+                  : letter.letter !== this.word[i] &&
+                    this.word.includes(letter.letter)
+                  ? 'wrong'
+                  : 'no',
+            };
+          });
+
+          this.currentLetter = 1;
+          this.currentLetterSubject.next(1);
+
+          if (this.currentGuess <= this.maxNumberOfGuesses) {
+            this.currentGuess++;
+            this.currentGuessSubject.next(this.currentGuess);
           }
-
-          return {
-            letter: letter.letter,
-            isCorrect:
-              letter.letter === this.word[i]
-                ? 'yes'
-                : letter.letter !== this.word[i] &&
-                  this.word.includes(letter.letter)
-                ? 'wrong'
-                : 'no',
-          };
-        });
-
-        this.currentLetter = 1;
-        this.currentGuess <= 5 ? this.currentGuess++ : null;
+        }
       }
+    }
+  }
+
+  isValidWord(): boolean {
+    let wordJoined: string = '';
+    this.guesses[this.currentGuess - 1].letters.forEach((letter) => {
+      wordJoined += letter.letter;
+    });
+
+    console.log(wordJoined);
+
+    if (ENGLISH_WORDS.includes(wordJoined)) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
