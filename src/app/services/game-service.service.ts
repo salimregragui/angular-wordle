@@ -27,6 +27,10 @@ export class GameService {
   falseLetters: string[] = [];
   wrongPosLetters: string[] = [];
 
+  correctLettersSubject: Subject<string[]> = new BehaviorSubject<string[]>([]);
+  falseLettersSubject: Subject<string[]> = new BehaviorSubject<string[]>([]);
+  wrongPosLettersSubject: Subject<string[]> = new BehaviorSubject<string[]>([]);
+
   constructor(private notificationService: NotificationsService) {
     this.generateNewGame();
   }
@@ -44,15 +48,15 @@ export class GameService {
   }
 
   getWrongPosLetters(): Observable<string[]> {
-    return of(this.wrongPosLetters);
+    return this.wrongPosLettersSubject.asObservable();
   }
 
   getCorrectLetters(): Observable<string[]> {
-    return of(this.correctLetters);
+    return this.correctLettersSubject.asObservable();
   }
 
   getFalseLetters(): Observable<string[]> {
-    return of(this.falseLetters);
+    return this.falseLettersSubject.asObservable();
   }
 
   getGameState(): Observable<string> {
@@ -106,14 +110,17 @@ export class GameService {
           ].letters.map((letter, i) => {
             if (letter.letter === this.word[i]) {
               this.correctLetters.push(letter.letter);
+              this.correctLettersSubject.next(this.correctLetters);
             } else if (
               letter.letter !== this.word[i] &&
               this.word.includes(letter.letter)
             ) {
               this.wrongPosLetters.push(letter.letter);
+              this.wrongPosLettersSubject.next(this.wrongPosLetters);
               isCorrectWord = false;
             } else {
               this.falseLetters.push(letter.letter);
+              this.falseLettersSubject.next(this.falseLetters);
               isCorrectWord = false;
             }
 
@@ -196,5 +203,11 @@ export class GameService {
     this.currentGuess = 1;
     this.currentGuessSubject.next(1);
     this.currentLetterSubject.next(1);
+    this.correctLetters = [];
+    this.falseLetters = [];
+    this.wrongPosLetters = [];
+    this.correctLettersSubject.next([]);
+    this.wrongPosLettersSubject.next([]);
+    this.falseLettersSubject.next([]);
   }
 }
