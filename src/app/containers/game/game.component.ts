@@ -11,6 +11,8 @@ export class GameComponent implements OnInit {
   currentGuess: number;
   currentLetter: number;
   guesses: Guess[];
+  gameState: string;
+
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
@@ -25,5 +27,13 @@ export class GameComponent implements OnInit {
     this.gameService
       .getCurrentGuess()
       .subscribe((guess) => (this.currentGuess = guess));
+
+    this.gameService
+      .getGameState()
+      .subscribe((gameState) => (this.gameState = gameState));
+  }
+
+  generateNewGame(): void {
+    this.gameService.generateNewGame();
   }
 }

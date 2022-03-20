@@ -12,12 +12,15 @@ export class GameService {
   word: string = 'sport';
   guesses: Guess[] = [];
   maxNumberOfGuesses: number = 6;
-  maxWordLetter: number = 6;
+  maxWordLetter: number = 5;
   currentGuess: number;
   currentLetter: number;
 
   currentGuessSubject: Subject<number> = new BehaviorSubject<number>(1);
   currentLetterSubject: Subject<number> = new BehaviorSubject<number>(1);
+  guessesSubject: Subject<Guess[]> = new BehaviorSubject<Guess[]>([]);
+
+  gameState: Subject<string> = new BehaviorSubject<string>('playing');
 
   //for keyboard
   correctLetters: string[] = [];
@@ -25,32 +28,11 @@ export class GameService {
   wrongPosLetters: string[] = [];
 
   constructor(private notificationService: NotificationsService) {
-    const wordsThatAreMaxWordLetter = ENGLISH_WORDS.filter(
-      (word) => word.length === this.maxWordLetter
-    );
-
-    this.word =
-      wordsThatAreMaxWordLetter[
-        Math.floor(Math.random() * wordsThatAreMaxWordLetter.length)
-      ];
-
-    for (let i = 0; i < this.maxNumberOfGuesses; i++) {
-      this.guesses.push({
-        letters: Array.from(Array(this.maxWordLetter)).map((i) => {
-          return {
-            letter: '',
-            isCorrect: '',
-          };
-        }),
-      });
-    }
-
-    this.currentLetter = 1;
-    this.currentGuess = 1;
+    this.generateNewGame();
   }
 
   getGuesses(): Observable<Guess[]> {
-    return of(this.guesses);
+    return this.guessesSubject.asObservable();
   }
 
   getCurrentLetter(): Observable<number> {
@@ -73,6 +55,10 @@ export class GameService {
     return of(this.falseLetters);
   }
 
+  getGameState(): Observable<string> {
+    return this.gameState.asObservable();
+  }
+
   keyPressHandle(letter: string): void {
     if (
       this.currentLetter <= this.maxWordLetter &&
@@ -87,6 +73,8 @@ export class GameService {
           isCorrect: '',
         };
 
+        this.guessesSubject.next(this.guesses);
+
         if (this.currentLetter < this.maxWordLetter) {
           this.currentLetter++;
           this.currentLetterSubject.next(this.currentLetter);
@@ -96,6 +84,8 @@ export class GameService {
           letter: '',
           isCorrect: '',
         };
+
+        this.guessesSubject.next(this.guesses);
 
         if (this.currentLetter > 1) {
           this.currentLetter--;
@@ -109,6 +99,8 @@ export class GameService {
         ].letter !== ''
       ) {
         if (this.isValidWord()) {
+          let isCorrectWord: boolean = true;
+
           this.guesses[this.currentGuess - 1].letters = this.guesses[
             this.currentGuess - 1
           ].letters.map((letter, i) => {
@@ -119,8 +111,10 @@ export class GameService {
               this.word.includes(letter.letter)
             ) {
               this.wrongPosLetters.push(letter.letter);
+              isCorrectWord = false;
             } else {
               this.falseLetters.push(letter.letter);
+              isCorrectWord = false;
             }
 
             return {
@@ -135,12 +129,20 @@ export class GameService {
             };
           });
 
+          this.guessesSubject.next(this.guesses);
+
           this.currentLetter = 1;
           this.currentLetterSubject.next(1);
 
-          if (this.currentGuess <= this.maxNumberOfGuesses) {
+          if (this.currentGuess < this.maxNumberOfGuesses && !isCorrectWord) {
             this.currentGuess++;
             this.currentGuessSubject.next(this.currentGuess);
+          } else {
+            if (isCorrectWord) {
+              this.gameState.next('won');
+            } else {
+              this.gameState.next('lost');
+            }
           }
         } else {
           this.notificationService.addNotification({
@@ -163,5 +165,36 @@ export class GameService {
     } else {
       return false;
     }
+  }
+
+  generateNewGame(): void {
+    const wordsThatAreMaxWordLetter = ENGLISH_WORDS.filter(
+      (word) => word.length === this.maxWordLetter
+    );
+
+    this.word =
+      wordsThatAreMaxWordLetter[
+        Math.floor(Math.random() * wordsThatAreMaxWordLetter.length)
+      ];
+
+    this.guesses = [];
+
+    for (let i = 0; i < this.maxNumberOfGuesses; i++) {
+      this.guesses.push({
+        letters: Array.from(Array(this.maxWordLetter)).map((i) => {
+          return {
+            letter: '',
+            isCorrect: '',
+          };
+        }),
+      });
+    }
+
+    this.guessesSubject.next(this.guesses);
+    this.gameState.next('playing');
+    this.currentLetter = 1;
+    this.currentGuess = 1;
+    this.currentGuessSubject.next(1);
+    this.currentLetterSubject.next(1);
   }
 }
