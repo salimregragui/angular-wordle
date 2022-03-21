@@ -1,19 +1,20 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-    @Output() generateNewGame: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  @Output() generateNewGame: EventEmitter<any> = new EventEmitter();
+  @Input() gameState: string;
+  @Input() word: string;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 
   generateNewGameHandler(): void {
-      this.generateNewGame.emit("");
+    this.generateNewGame.emit('');
   }
-
 }

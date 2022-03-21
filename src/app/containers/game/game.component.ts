@@ -12,6 +12,7 @@ export class GameComponent implements OnInit {
   currentLetter: number;
   guesses: Guess[];
   gameState: string;
+  word: string;
 
   constructor(private gameService: GameService) {}
 
@@ -31,6 +32,8 @@ export class GameComponent implements OnInit {
     this.gameService
       .getGameState()
       .subscribe((gameState) => (this.gameState = gameState));
+
+    this.gameService.getWord().subscribe((word) => (this.word = word));
   }
 
   generateNewGame(): void {

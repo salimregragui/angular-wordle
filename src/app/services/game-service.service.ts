@@ -31,6 +31,8 @@ export class GameService {
   falseLettersSubject: Subject<string[]> = new BehaviorSubject<string[]>([]);
   wrongPosLettersSubject: Subject<string[]> = new BehaviorSubject<string[]>([]);
 
+  wordSubject: Subject<string> = new BehaviorSubject<string>('');
+
   constructor(private notificationService: NotificationsService) {
     this.generateNewGame();
   }
@@ -61,6 +63,10 @@ export class GameService {
 
   getGameState(): Observable<string> {
     return this.gameState.asObservable();
+  }
+
+  getWord(): Observable<string> {
+    return this.wordSubject.asObservable();
   }
 
   keyPressHandle(letter: string): void {
@@ -183,6 +189,7 @@ export class GameService {
       wordsThatAreMaxWordLetter[
         Math.floor(Math.random() * wordsThatAreMaxWordLetter.length)
       ];
+    this.wordSubject.next(this.word);
 
     this.guesses = [];
 

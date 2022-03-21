@@ -1,7 +1,15 @@
 <div class="modal">
   <h1>Game finished !</h1>
-  <p>You finished playing this word ! It took you 5 mins to do so !</p>
-
+  <p>
+    <span *ngIf="gameState === 'won'; else lostText"
+      >You won ! The word was <span class="wordToFind">{{ word }}</span
+      >. You found it in 4 guesses</span
+    >
+  </p>
+  <ng-template #lostText
+    >Oh no you lost ! The word was <span class="wordToFind">{{ word }}</span
+    >. You couldn't find it. Better luck next time!</ng-template
+  >
   <div class="actions">
     <button (click)="generateNewGameHandler()">New game</button>
     <a routerLink="/stats">Your statistics</a>

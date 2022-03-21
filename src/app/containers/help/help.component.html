@@ -1,1 +1,25 @@
-<p>help works!</p>
+<div class="help">
+  <h1>How to play</h1>
+  <p>
+    You have to guess the hidden word in as many tries as you selected in the
+    settings (default: 6) and the color of the letters changes to show how close
+    you are.
+    <br /><br />
+    To start the game, just enter any word, for example:
+  </p>
+  <app-guess-line [guess]="guess"></app-guess-line>
+  <ul class="explaination">
+    <li>
+      <span class="letter-wrong">T</span>
+      <span class="letter-wrong">B</span> aren't in the target word at all.
+    </li>
+    <li>
+      <span class="letter-maybe">A</span>
+      <span class="letter-maybe">L</span> are in the word but in the wrong spot.
+    </li>
+    <li>
+      <span class="letter-correct">E</span> is in the word and in the correct
+      spot.
+    </li>
+  </ul>
+</div>

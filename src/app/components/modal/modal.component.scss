@@ -34,6 +34,13 @@
     font-weight: 500;
     color: #818181;
     max-width: 80%;
+    line-height: 20px;
+  }
+
+  .wordToFind {
+    color: #27ae60;
+    font-weight: 600;
+    font-size: 16px;
   }
 
   .actions {
@@ -96,5 +103,17 @@
   .modal {
     width: 30vw;
     height: 40vh;
+
+    .actions {
+      button {
+        width: 130px;
+        font-size: 12px;
+      }
+
+      a {
+        width: 130px;
+        font-size: 12px;
+      }
+    }
   }
 }
