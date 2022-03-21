@@ -1,1 +1,29 @@
-<p>stats works!</p>
+<div class="stats">
+  <h2 class="noStats" *ngIf="gameHistory.length === 0">
+    You haven't played a single game yet !
+  </h2>
+
+  <div class="stats-data" *ngIf="gameHistory.length > 0">
+    <div class="stats-infos">
+      <div class="stats-infos-item">
+        <h2>{{ gameHistory.length }}</h2>
+        <p>Games Played</p>
+      </div>
+      <div class="stats-infos-item">
+        <h2>{{ wonGames.length }}</h2>
+        <p>Games Won</p>
+      </div>
+      <div class="stats-infos-item">
+        <h2>{{ lostGames.length }}</h2>
+        <p>Games Lost</p>
+      </div>
+    </div>
+
+    <ul class="stats-games">
+      <app-stats-item
+        *ngFor="let stat of gameHistory"
+        [stat]="stat"
+      ></app-stats-item>
+    </ul>
+  </div>
+</div>

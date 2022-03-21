@@ -1,0 +1,89 @@
+.stats {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .noStats {
+    width: 90%;
+    height: 60px;
+    background-color: #e74c3c;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+
+  .stats-data {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+    .stats-infos {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #b9b9b9;
+      width: 90%;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-right: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      box-sizing: border-box;
+      border-radius: 10px;
+
+      .stats-infos-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5px;
+        box-sizing: border-box;
+        color: #191816;
+
+        h2 {
+          margin: 0;
+        }
+
+        p {
+          margin: 0;
+          text-align: center;
+          font-weight: 500;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .stats-games {
+      width: 90%;
+      padding: 0;
+      margin-top: 30px;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .stats {
+    .noStats {
+      width: 60%;
+    }
+    .stats-data {
+      .stats-infos {
+        justify-content: space-around;
+        width: 50%;
+      }
+
+      .stats-games {
+        width: 40%;
+      }
+    }
+  }
+}

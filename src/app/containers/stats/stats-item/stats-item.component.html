@@ -1,0 +1,14 @@
+<div class="stats-item">
+  <div class="leftSide">
+    <li>
+      The word was : <span>{{ stat.word }}</span>
+    </li>
+    <li>
+      You had : <span>{{ actualGuesses }}</span>
+      {{ actualGuesses === 1 ? "guess" : "guesses" }}
+    </li>
+  </div>
+  <div class="rightSide {{ stat.state === 'won' ? 'won-game' : 'lost-game' }}">
+    {{ stat.state === "won" ? "Won" : "Lost" }}
+  </div>
+</div>

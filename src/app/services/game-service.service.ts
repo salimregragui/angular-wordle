@@ -20,7 +20,7 @@ export class GameService {
   currentLetterSubject: Subject<number> = new BehaviorSubject<number>(1);
   guessesSubject: Subject<Guess[]> = new BehaviorSubject<Guess[]>([]);
 
-  gameState: Subject<string> = new BehaviorSubject<string>('playing');
+  gameState: BehaviorSubject<string> = new BehaviorSubject<string>('playing');
 
   //for keyboard
   correctLetters: string[] = [];
@@ -156,6 +156,7 @@ export class GameService {
             } else {
               this.gameState.next('lost');
             }
+            this.saveGameToData();
           }
         } else {
           this.notificationService.addNotification({
@@ -235,5 +236,25 @@ export class GameService {
     this.correctLettersSubject.next([]);
     this.wrongPosLettersSubject.next([]);
     this.falseLettersSubject.next([]);
+  }
+
+  saveGameToData(): void {
+    const gameData = localStorage.getItem('game-data');
+
+    if (gameData) {
+      let currentSettings = JSON.parse(gameData);
+
+      if (!currentSettings.games) {
+        currentSettings.games = [];
+      }
+
+      currentSettings.games.push({
+        word: this.word,
+        guesses: this.guesses,
+        state: this.gameState.getValue(),
+      });
+      
+      localStorage.setItem('game-data', JSON.stringify(currentSettings));
+    }
   }
 }

@@ -60,7 +60,7 @@ export class SettingsComponent implements OnInit {
 
       localStorage.setItem('game-data', JSON.stringify(gameData));
     }
-    this.settings.controls['maxWordLetters'].setValue(3);
+    this.settings.controls['maxWordLetters'].setValue(5);
     this.settings.controls['maxGuesses'].setValue(6);
     this.settings.controls['darkMode'].setValue(true);
 
@@ -74,6 +74,7 @@ export class SettingsComponent implements OnInit {
 
   settingsSubmitHandler(): void {
     let gameData = localStorage.getItem('game-data');
+
     if (gameData) {
       let currentSettings = JSON.parse(gameData);
 
@@ -102,5 +103,23 @@ export class SettingsComponent implements OnInit {
     });
 
     this.gameService.generateNewGame();
+  }
+
+  clearGameHistory(): void {
+    let gameData = localStorage.getItem('game-data');
+
+    if (gameData) {
+      let currentSettings = JSON.parse(gameData);
+
+      if (currentSettings.games) {
+        currentSettings.games = [];
+      }
+
+      localStorage.setItem('game-data', JSON.stringify(currentSettings));
+      this.notificationService.addNotification({
+        message: 'Game history removed !',
+        type: 'success',
+      });
+    }
   }
 }

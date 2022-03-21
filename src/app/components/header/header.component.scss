@@ -43,8 +43,12 @@ header {
       height: 24px;
       margin-left: 20px;
 
+      transition: 0.2s;
+
       &:hover {
         opacity: 0.4;
+
+        transition: 0.2s;
       }
     }
   }
@@ -54,11 +58,11 @@ header {
   header {
     height: 80px;
     .header-left {
-        a {
-            span {
-                display: inline;
-            }
+      a {
+        span {
+          display: inline;
         }
+      }
     }
     .header-right {
       a {

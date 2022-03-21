@@ -16,6 +16,7 @@ import { NotificationCenterComponent } from './components/notification-center/no
 import { NotificationItemComponent } from './components/notification-center/notification-item/notification-item.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StatsItemComponent } from './containers/stats/stats-item/stats-item.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NotificationCenterComponent,
     NotificationItemComponent,
     ModalComponent,
+    StatsItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],
