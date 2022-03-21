@@ -14,6 +14,7 @@ export class HelpComponent implements OnInit {
       { letter: 'B', isCorrect: 'no' },
       { letter: 'L', isCorrect: 'wrong' },
       { letter: 'E', isCorrect: 'yes' },
+      { letter: 'S', isCorrect: 'yes' },
     ],
   };
   constructor() {}

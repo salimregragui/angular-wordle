@@ -159,7 +159,7 @@ export class GameService {
           }
         } else {
           this.notificationService.addNotification({
-            message: 'This word is not a valid english word !',
+            message: 'This is not a valid english word !',
             type: 'error',
           });
         }
@@ -181,6 +181,25 @@ export class GameService {
   }
 
   generateNewGame(): void {
+    const gameData = localStorage.getItem('game-data');
+
+    if (gameData) {
+      let currentSettings = JSON.parse(gameData);
+
+      this.maxNumberOfGuesses = currentSettings.settings.maxGuesses;
+      this.maxWordLetter = currentSettings.settings.maxWordLetters;
+    } else {
+      let gameData = {
+        settings: {
+          maxWordLetters: this.maxWordLetter,
+          maxGuesses: this.maxNumberOfGuesses,
+          darkMode: true,
+        },
+      };
+
+      localStorage.setItem('game-data', JSON.stringify(gameData));
+    }
+
     const wordsThatAreMaxWordLetter = ENGLISH_WORDS.filter(
       (word) => word.length === this.maxWordLetter
     );

@@ -1,1 +1,62 @@
-<p>settings works!</p>
+<div class="settings">
+  <h1>Game settings</h1>
+  <form [formGroup]="settings" (submit)="settingsSubmitHandler()">
+    <div class="form-item">
+      <label for="maxWordletters">Number of letters in the word</label>
+
+      <div class="form-item-group">
+        <button
+          *ngFor="let i of maxWordLettersChoices"
+          type="button"
+          class="checkbox {{
+            settings.controls['maxWordLetters'].value.toString() ===
+            i.toString()
+              ? 'selected'
+              : ''
+          }}"
+          (click)="settings.controls['maxWordLetters'].setValue(i)"
+        >
+          {{ i }}
+        </button>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <label for="maxWordletters">Maximum number of guesses</label>
+
+      <div class="form-item-group">
+        <button
+          *ngFor="let i of maxGuessesChoices"
+          type="button"
+          class="checkbox {{
+            settings.controls['maxGuesses'].value.toString() === i.toString()
+              ? 'selected'
+              : ''
+          }}"
+          (click)="settings.controls['maxGuesses'].setValue(i)"
+        >
+          {{ i }}
+        </button>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <label for="maxWordletters">Game history options</label>
+
+      <div class="form-item-group">
+        <button type="button" class="game-option">Clear game history</button>
+        <button
+          type="button"
+          class="game-option second-button-type"
+          (click)="resetSettings()"
+        >
+          Reset settings
+        </button>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <input type="submit" value="Update settings" />
+    </div>
+  </form>
+</div>

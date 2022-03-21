@@ -13,12 +13,14 @@
   padding-left: 15px;
   padding-right: 15px;
   box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.55) 0px 5px 15px;
+  cursor: pointer;
 
   &.error {
     background-color: #e74c3c;
   }
 
   &.success {
-    background-color: #8a8e7f;
+    background-color: #27ae60;
   }
 }

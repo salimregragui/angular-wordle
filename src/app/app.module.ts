@@ -15,6 +15,7 @@ import { KeyboardComponent } from './components/keyboard/keyboard.component';
 import { NotificationCenterComponent } from './components/notification-center/notification-center.component';
 import { NotificationItemComponent } from './components/notification-center/notification-item/notification-item.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,13 +31,10 @@ import { ModalComponent } from './components/modal/modal.component';
     KeyboardComponent,
     NotificationCenterComponent,
     NotificationItemComponent,
-    ModalComponent
+    ModalComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

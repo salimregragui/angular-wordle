@@ -8,5 +8,10 @@
   </div>
 
   <app-keyboard type="qwerty"></app-keyboard>
-  <app-modal *ngIf="gameState !== 'playing'" (generateNewGame)="generateNewGame()" [gameState]="gameState" [word]="word"></app-modal>
+  <app-modal
+    *ngIf="gameState !== 'playing'"
+    (generateNewGame)="generateNewGame()"
+    [gameState]="gameState"
+    [word]="word"
+  ></app-modal>
 </div>
