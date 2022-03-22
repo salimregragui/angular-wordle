@@ -1,9 +1,9 @@
 <header>
   <div class="header-left">
-    <a routerLink="/">
-      AngularWordle
-      <span>By Salim Regragui</span>
-    </a>
+    <a routerLink="/">{{router.url === "/" ? "AngularWordle" : "Back to game" }}</a>
+    <a class="portfolio" href="https://www.salimregragui.com/" target="_blank"
+      >By salimregragui.com</a
+    >
   </div>
 
   <div class="header-center"></div>

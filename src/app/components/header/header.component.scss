@@ -10,6 +10,8 @@ header {
   box-sizing: border-box;
 
   .header-left {
+    display: flex;
+    flex-direction: column;
     a {
       text-decoration: none;
       font-weight: 800;
@@ -18,18 +20,17 @@ header {
 
       transition: 0.2s;
 
-      span {
-        font-weight: 500;
-        font-size: 12px;
-        color: #8a8e7f;
-        display: none;
-      }
-
       &:hover {
         opacity: 0.6;
 
         transition: 0.2s;
       }
+    }
+
+    .portfolio {
+      font-weight: 500;
+      font-size: 12px;
+      color: #8a8e7f;
     }
   }
 
@@ -58,10 +59,15 @@ header {
   header {
     height: 80px;
     .header-left {
+      display: inline;
       a {
         span {
           display: inline;
         }
+      }
+      .portfolio {
+        margin-left: 5px;
+        font-size: 12px;
       }
     }
     .header-right {
